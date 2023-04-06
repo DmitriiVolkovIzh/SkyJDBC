@@ -4,6 +4,8 @@ import sky.project.employeedao.EmployeeDAO;
 import sky.project.employeedao.EmployeeDAOImpl;
 import sky.project.employeedao.citydao.CityDAO;
 import sky.project.employeedao.citydao.CityDAOImpl;
+import sky.project.exceptions.NotFoundInDataBaseException;
+import sky.project.models.City;
 import sky.project.models.Employee;
 
 import java.sql.SQLException;
@@ -14,19 +16,43 @@ public class Application {
 
     private static EmployeeDAO employeeDAO = new EmployeeDAOImpl();
 
+    private static void printEmployees() {
+        for (Employee employee : employeeDAO.getEmployees())
+            System.out.println(employee);
+    }
+
+    private static void printCities() {
+        for (City city : cityDAO.cities())
+            System.out.println(city);
+    }
+
+    private static Object findEmployee(Long id) {
+        try {
+            return employeeDAO.findEmployeeById(id);
+        } catch (NotFoundInDataBaseException e) {
+            return e.getMessage();
+        }
+    }
+
+    private static void deleteEmployeeFromDB(Long id) {
+        try {
+            employeeDAO.fireEmployee(employeeDAO.findEmployeeById(id));
+        } catch (NotFoundInDataBaseException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+    private static void refactorEmployeeById(Employee employee) {
+        try {
+            employeeDAO.findEmployeeById(employee.getId());
+            employeeDAO.refactorEmployee(employee);
+        } catch (NotFoundInDataBaseException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
     public static void main(String[] args) throws SQLException {
 
-        // System.out.println(cityDAO.findById(2));
-
-        // System.out.println(employeeDAO.findById(2));
-
-        // employeeDAO.hireNewEmployee("Данил","Ханов",87, 3);
-
-        //employeeDAO.refactorEmployee(1,"Алексей","Грачев",46,1);
-
-        //employeeDAO.deleteEmployeeById(2);
-
-        //for (Employee employee:employeeDAO.getEmployees().toArray(new Employee[0]));
 
     }
 }

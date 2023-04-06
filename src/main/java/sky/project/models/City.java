@@ -1,9 +1,30 @@
 package sky.project.models;
 
+import javax.persistence.*;
+import java.util.List;
 import java.util.Objects;
 
+@Entity
+@Table(name = "city")
 public class City {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
+    private Integer id;
+    @Column(name = "name")
     private String name;
+
+    @OneToMany(mappedBy = "city", cascade = CascadeType.ALL)
+    private List<Employee> employees;
+
+    public City() {
+    }
+
+    public City(Integer id, String name) {
+        this.name = name;
+        this.id = id;
+    }
 
     public City(String name) {
         this.name = name;
@@ -18,20 +39,25 @@ public class City {
     }
 
     @Override
+    public String
+    toString() {
+        return name;
+    }
+
+    @Override
     public boolean equals(Object o) {
+
         if (this == o) return true;
-        if (!(o instanceof City)) return false;
+        if (o == null || getClass() != o.getClass()) return false;
         City city = (City) o;
-        return Objects.equals(getName(), city.getName());
+        return Objects.equals(name, city.name);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getName());
-    }
-
-    @Override
-    public String toString() {
-        return  name;
+        return Objects.hash(name);
     }
 }
+
+
+

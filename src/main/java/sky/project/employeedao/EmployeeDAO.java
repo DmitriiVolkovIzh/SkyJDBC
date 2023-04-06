@@ -6,15 +6,13 @@ import java.sql.SQLException;
 import java.util.List;
 
 public interface EmployeeDAO {
-    Employee findById(Integer id) throws SQLException;
+    Employee findEmployeeById(Long id);
 
-    void hireNewEmployee(String firstName, String lastName,
-                         Integer age, Integer cityId) throws SQLException;
+    void hireNewEmployee(Employee employee);
 
-    void refactorEmployee(Integer id, String firstName, String lastName,
-                          Integer age, Integer cityId) throws SQLException;
+    List<Employee> getEmployees();
 
-    void deleteEmployeeById(Integer id) throws SQLException;
+    void refactorEmployee(Employee employee);
 
-    List<Employee> getEmployees() throws SQLException;
+    void fireEmployee(Employee employee);
 }

@@ -8,7 +8,7 @@ import java.util.List;
 public interface EmployeeDAO {
     Employee findEmployeeById(Long id);
 
-    void hireNewEmployee(Employee employee);
+    void createNewEmployee(Employee employee);
 
     List<Employee> getEmployees();
 

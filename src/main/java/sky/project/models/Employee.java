@@ -1,5 +1,7 @@
 package sky.project.models;
 
+import sky.project.enums.Position;
+
 import javax.persistence.*;
 import java.util.Objects;
 @Entity
@@ -21,6 +23,9 @@ public class Employee {
     @ManyToOne
     @JoinColumn(referencedColumnName = "id")
     private City city;
+
+    @Enumerated(EnumType.STRING)
+    private Position position;
 
     public Employee() {
     }

@@ -19,7 +19,7 @@ public class EmployeeDAOImpl implements EmployeeDAO {
     }
 
     @Override
-    public void hireNewEmployee(Employee employee) {
+    public void createNewEmployee(Employee employee) {
         try (Session session = HibernateSessionFactoryUtil
                 .getSessionFactory().openSession()) {
             Transaction transaction = session.beginTransaction();
